@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todoapp/widget/app_buttom.dart';
+import 'package:todoapp/widget/bottomsheet.dart';
 import 'package:todoapp/widget/todo_list.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,11 +20,22 @@ class HomeScreen extends StatelessWidget {
         actions: [TextButton(onPressed: () {}, child: const Text('View More'))],
       ),
       body: const TodoList(),
-      bottomNavigationBar: const Padding(
-        padding: EdgeInsets.all(10.0),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(10.0),
         child: AppButtom(
-          text: 'Create New',
-        ),
+            text: 'Create New',
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15)),
+                  ),
+                  builder: (context) {
+                    return const TodoBottomSheet();
+                  });
+            }),
       ),
     );
   }
