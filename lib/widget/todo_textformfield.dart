@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TodoTextFormField extends StatelessWidget {
-  const TodoTextFormField({super.key});
+  final String label;
+  const TodoTextFormField({super.key, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class TodoTextFormField extends StatelessWidget {
         autocorrect: true,
         decoration: InputDecoration(
             border: InputBorder.none,
-            labelText: 'Add Task Name',
+            labelText: label,
             labelStyle: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,

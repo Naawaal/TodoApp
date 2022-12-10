@@ -17,7 +17,9 @@ class HomeScreen extends StatelessWidget {
               color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.transparent,
-        actions: [TextButton(onPressed: () {}, child: const Text('View More'))],
+        actions: [
+          TextButton(onPressed: () {}, child: const Text('View More')),
+        ],
       ),
       body: const TodoList(),
       bottomNavigationBar: Padding(
@@ -27,6 +29,7 @@ class HomeScreen extends StatelessWidget {
             onPressed: () {
               showModalBottomSheet(
                   context: context,
+                  isScrollControlled: true,
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(15),
