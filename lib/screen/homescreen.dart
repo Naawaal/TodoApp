@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todoapp/widget/app_buttom.dart';
 import 'package:todoapp/widget/bottomsheet.dart';
 import 'package:todoapp/widget/todo_list.dart';
+import 'package:todoapp/widget/todo_list_horizontal.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -21,7 +22,12 @@ class HomeScreen extends StatelessWidget {
           TextButton(onPressed: () {}, child: const Text('View More')),
         ],
       ),
-      body: const TodoList(),
+      body: Column(
+        children: const [
+          Expanded(child: TodoListHorizontal()),
+          Expanded(child: TodoList()),
+        ],
+      ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(10.0),
         child: AppButtom(

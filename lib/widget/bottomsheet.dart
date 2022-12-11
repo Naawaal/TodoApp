@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:todoapp/widget/app_buttom.dart';
 import 'package:todoapp/widget/date_time.dart';
 import 'package:todoapp/widget/todo_category.dart';
 import 'package:todoapp/widget/todo_textformfield.dart';
@@ -16,7 +17,7 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
   Widget build(BuildContext context) {
     return KeyboardVisibilityBuilder(builder: (context, visibility) {
       return SizedBox(
-        height: visibility ? 700 : null,
+        height: visibility ? 750 : null,
         child: Padding(
           padding: const EdgeInsets.all(18),
           child: Column(
@@ -44,64 +45,93 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     'Task Name',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  TodoTextFormField(
+                  const TodoTextFormField(
                     label: 'Add New ToDo',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
-                  Text(
+                  const Text(
                     'Category',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
-                  TodoCategory(),
-                  SizedBox(
+                  const TodoCategory(),
+                  const SizedBox(
                     height: 5,
                   ),
-                  Text(
+                  const Text(
                     'Description',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                     child: TodoTextFormField(
                       label: 'Description',
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
-                  Text(
+                  const Text(
                     'Date & Time',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  TodoDateTime(),
+                  const TodoDateTime(),
+                  Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: AppButtom(
+                              text: 'Cancel',
+                              border: true,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: AppButtom(
+                              text: 'Confirm',
+                              onPressed: () {},
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ],

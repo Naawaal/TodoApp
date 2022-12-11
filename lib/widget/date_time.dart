@@ -95,7 +95,7 @@ class _DateTimeState extends State<TodoDateTime> {
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w100,
-              color: Colors.white,
+              color: Colors.grey,
             ),
           ),
         ]),
