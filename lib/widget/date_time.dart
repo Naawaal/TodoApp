@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TodoDateTime extends StatefulWidget {
-  const TodoDateTime({super.key});
+  final Function(DateTime) onDateTimeSelect;
+  const TodoDateTime({super.key, required this.onDateTimeSelect});
 
   @override
   State<TodoDateTime> createState() => _DateTimeState();
@@ -44,6 +45,14 @@ class _DateTimeState extends State<TodoDateTime> {
               setState(() {
                 _selectedDate = pickDate;
               });
+              final dateTimeToPass = DateTime(
+                _selectedDate!.year,
+                _selectedDate!.month,
+                _selectedDate!.day,
+                _selectedTime?.hour ?? 0,
+                _selectedTime?.minute ?? 0,
+              );
+              widget.onDateTimeSelect(dateTimeToPass);
             },
           ),
         ),
@@ -65,6 +74,15 @@ class _DateTimeState extends State<TodoDateTime> {
               setState(() {
                 _selectedTime = pickTime;
               });
+
+              final dateTimeToPass = DateTime(
+                _selectedDate?.year ?? 0,
+                _selectedDate?.month ?? 0,
+                _selectedDate?.day ?? 0,
+                _selectedTime!.hour,
+                _selectedTime!.minute,
+              );
+              widget.onDateTimeSelect(dateTimeToPass);
             },
           ),
         ),

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class TodoTextFormField extends StatelessWidget {
   final String label;
-  const TodoTextFormField({super.key, required this.label});
+  final TextEditingController controller;
+  const TodoTextFormField(
+      {super.key, required this.label, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +13,7 @@ class TodoTextFormField extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey.shade200, borderRadius: BorderRadius.circular(12)),
       child: TextFormField(
+        controller: controller,
         autocorrect: true,
         decoration: InputDecoration(
             border: InputBorder.none,

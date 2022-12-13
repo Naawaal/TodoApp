@@ -4,9 +4,17 @@ import 'package:todoapp/widget/bottomsheet.dart';
 import 'package:todoapp/widget/todo_list.dart';
 import 'package:todoapp/widget/todo_list_horizontal.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../models/todo.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final List<Todo> _todos = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,9 +31,15 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Column(
-        children: const [
-          Expanded(child: TodoListHorizontal()),
-          Expanded(child: TodoList()),
+        children: [
+          Expanded(
+              child: TodoListHorizontal(
+            todos: _todos,
+          )),
+          Expanded(
+              child: TodoList(
+            todos: _todos,
+          )),
         ],
       ),
       bottomNavigationBar: Padding(
@@ -42,7 +56,14 @@ class HomeScreen extends StatelessWidget {
                         topRight: Radius.circular(15)),
                   ),
                   builder: (context) {
-                    return const TodoBottomSheet();
+                    return TodoBottomSheet(
+                      onPressedCreate: (Todo todo) {
+                        setState(() {
+                          _todos.add(todo);
+                        });
+                        Navigator.pop(context);
+                      },
+                    );
                   });
             }),
       ),

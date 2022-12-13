@@ -5,14 +5,22 @@ import 'package:todoapp/widget/date_time.dart';
 import 'package:todoapp/widget/todo_category.dart';
 import 'package:todoapp/widget/todo_textformfield.dart';
 
+import '../models/todo.dart';
+
 class TodoBottomSheet extends StatefulWidget {
-  const TodoBottomSheet({super.key});
+  final Function(Todo) onPressedCreate;
+  const TodoBottomSheet({super.key, required this.onPressedCreate});
 
   @override
   State<TodoBottomSheet> createState() => _TodoBottomSheetState();
 }
 
 class _TodoBottomSheetState extends State<TodoBottomSheet> {
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  String _category = 'Personal';
+  DateTime? _dateTime;
+
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibilityBuilder(builder: (context, visibility) {
@@ -56,8 +64,9 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const TodoTextFormField(
+                  TodoTextFormField(
                     label: 'Add New ToDo',
+                    controller: _titleController,
                   ),
                   const SizedBox(
                     height: 5,
@@ -72,7 +81,13 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
                   const SizedBox(
                     height: 5,
                   ),
-                  const TodoCategory(),
+                  TodoCategory(
+                    onCategorySelect: (String category) {
+                      setState(() {
+                        _category = category;
+                      });
+                    },
+                  ),
                   const SizedBox(
                     height: 5,
                   ),
@@ -86,10 +101,11 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
                   const SizedBox(
                     height: 5,
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 100,
                     child: TodoTextFormField(
                       label: 'Description',
+                      controller: _descriptionController,
                     ),
                   ),
                   const SizedBox(
@@ -102,7 +118,11 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const TodoDateTime(),
+                  TodoDateTime(
+                    onDateTimeSelect: (DateTime dateTime) {
+                      _dateTime = dateTime;
+                    },
+                  ),
                   Column(
                     children: [
                       const SizedBox(
@@ -124,8 +144,18 @@ class _TodoBottomSheetState extends State<TodoBottomSheet> {
                           ),
                           Expanded(
                             child: AppButtom(
-                              text: 'Confirm',
-                              onPressed: () {},
+                              text: 'Create',
+                              onPressed: () {
+                                if (_dateTime != null) {
+                                  final todo = Todo(
+                                    title: _titleController.text,
+                                    description: _descriptionController.text,
+                                    category: _category,
+                                    dateTime: _dateTime!,
+                                  );
+                                  widget.onPressedCreate(todo);
+                                }
+                              },
                             ),
                           ),
                         ],

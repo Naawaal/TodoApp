@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
 
-class TodoHorizontalItem extends StatelessWidget {
-  const TodoHorizontalItem({super.key});
+class TodoHorizontalItem extends StatefulWidget {
+  final Color color;
+  const TodoHorizontalItem({
+    super.key,
+    r,
+    required this.color,
+  });
 
+  @override
+  State<TodoHorizontalItem> createState() => _TodoHorizontalItemState();
+}
+
+class _TodoHorizontalItemState extends State<TodoHorizontalItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(bottom: 10),
       margin: const EdgeInsets.only(right: 10),
-      decoration: const BoxDecoration(
-        color: Colors.orange,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+      decoration: BoxDecoration(
+        color: widget.color,
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
@@ -24,7 +34,7 @@ class TodoHorizontalItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  'Design UI ToDo APP',
+                  'Hi',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 20,

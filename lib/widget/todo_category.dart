@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TodoCategory extends StatefulWidget {
-  const TodoCategory({super.key});
+  final Function(String) onCategorySelect;
+  const TodoCategory({super.key, required this.onCategorySelect});
 
   @override
   State<TodoCategory> createState() => _TodoCategoryState();
@@ -30,6 +31,7 @@ class _TodoCategoryState extends State<TodoCategory> {
               setState(() {
                 activeCategory = 'Personal';
               });
+              widget.onCategorySelect('Personal');
             },
             isActive: activeCategory == 'Personal',
           ),
@@ -48,6 +50,7 @@ class _TodoCategoryState extends State<TodoCategory> {
               setState(() {
                 activeCategory = 'Teams';
               });
+              widget.onCategorySelect('Teams');
             },
             isActive: activeCategory == 'Teams',
           ),
